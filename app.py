@@ -41,4 +41,4 @@ def analyze():
     return jsonify({"risk": risk})
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(host="0.0.0.0")
