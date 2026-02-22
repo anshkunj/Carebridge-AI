@@ -30,6 +30,10 @@ def calculate_risk(symptoms, age):
     else:
         return "High"
 
+@app.route("/")
+def home():
+    return "CareBridge API is running 🚀"
+
 @app.route("/analyze", methods=["POST"])
 def analyze():
     data = request.json
