@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>CareBridge AI 🚑</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="container">
+
+<h1 class="hero-title">CareBridge 🚑</h1>
+<p class="tagline">AI Health Risk Analyzer</p>
+
+<div class="accessibility-controls">
+<button onclick="toggleTheme()">🌗 Theme</button>
+<button onclick="toggleText()">A+ Text</button>
+</div>
+
+<div class="card">
+
+<form id="healthForm">
+
+<label>Symptoms</label>
+<textarea id="symptoms" required></textarea>
+
+<button type="button" onclick="startVoice()">🎙 Speak</button>
+
+<label>Age</label>
+<input type="number" id="age" required>
+
+<button type="submit">Analyze Risk</button>
+
+</form>
+
+<div id="result">
+<div id="riskText">Risk Result</div>
+
+<div class="risk-bar-container">
+<div class="risk-bar" id="riskBar"></div>
+</div>
+
+<div class="report-card" id="report"></div>
+
+</div>
+
+</div>
+
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
