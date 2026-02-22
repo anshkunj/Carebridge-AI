@@ -78,16 +78,39 @@ def home():
 @app.route("/analyze", methods=["POST"])
 def analyze():
     data = request.get_json()
-    symptoms = data.get("symptoms", "")
-    age = int(data.get("age", 0))
 
-    risk, explanation = calculate_ai_risk(symptoms, age)
+    symptoms = data.get("symptoms","").lower()
+    age = int(data.get("age",0))
+
+    score = 0
+
+    # Symptom intelligence scoring
+    if "fever" in symptoms: score += 2
+    if "cough" in symptoms: score += 2
+    if "chest pain" in symptoms: score += 5
+    if "breathing" in symptoms: score += 5
+    if "dizziness" in symptoms: score += 3
+    if age > 60: score += 3
+
+    # Risk classification
+    if score <= 3:
+        risk="Low"
+        confidence=70
+        advice="Rest + hydration recommended"
+    elif score <=7:
+        risk="Moderate"
+        confidence=80
+        advice="Monitor symptoms and consult doctor"
+    else:
+        risk="High"
+        confidence=92
+        advice="Seek immediate medical attention"
 
     return jsonify({
-        "risk": risk,
-        "explanation": explanation
+        "risk":risk,
+        "confidence":confidence,
+        "explanation":advice
     })
-
 
 if __name__ == "__main__":
     app.run()
