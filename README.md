@@ -82,7 +82,7 @@ GitHub Pages
   "explanation": "Rest and hydrate"  
 }  
 
->Try it live from the frontend: https://anshkunj.github.io/carebridge-ai/
+>Try it live from the frontend: https://anshkunj.github.io/Carebridge-AI/
 
 >Try it live from the backend: https://https://carebridge-backend-ro4e.onrender.com/
 
