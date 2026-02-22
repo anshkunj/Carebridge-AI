@@ -46,6 +46,57 @@ def ai_triage_engine(symptoms, age):
     return risk, probability, advice, sustainability_score
 
 
+@app.route("/")
+def index():
+    return """
+    <html>
+    <head>
+        <meta http-equiv="refresh" content="2; url=https://anshkunj.github.io/carebridge-ai/" />
+
+        <style>
+            body{
+                background:#0f172a;
+                color:white;
+                font-family:Segoe UI;
+                display:flex;
+                justify-content:center;
+                align-items:center;
+                height:100vh;
+                flex-direction:column;
+                text-align:center;
+            }
+
+            .loader{
+                width:60px;
+                height:60px;
+                border-radius:50%;
+                border:6px solid #38bdf8;
+                border-top-color:transparent;
+                animation:spin 1s linear infinite;
+                margin-bottom:20px;
+            }
+
+            @keyframes spin{
+                to{ transform:rotate(360deg); }
+            }
+
+            h2{
+                color:#38bdf8;
+            }
+        </style>
+    </head>
+
+    <body>
+
+        <div class="loader"></div>
+
+        <h2>🚑 CareBridge AI Loading...</h2>
+        <p>Redirecting to Health Assistant Portal</p>
+
+    </body>
+    </html>
+    """
+
 @app.route("/analyze", methods=["POST"])
 def analyze():
 
