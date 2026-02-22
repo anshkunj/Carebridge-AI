@@ -40,11 +40,10 @@ Carebridge-AI/
 
 ## 🚀 Setup Instructions
 
-#### 1. Clone Repository
-```
-git clone https://github.com/yourusername/Carebridge-AI.git
-cd Carebridge-AI
-```
+#### Clone Repository
+
+git clone ```https://github.com/yourusername/Carebridge-AI.git```
+cd ```Carebridge-AI```
 
 #### Install Dependencies
 ```pip install -r requirements.txt```
