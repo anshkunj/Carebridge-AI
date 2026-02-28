@@ -100,6 +100,21 @@ def analyze_health(symptoms, age):
         "hospital_map": hospital_link
     }
 
+def generate_medical_summary(result):
+
+    risk = result.get("risk", "Unknown")
+
+    if risk == "Low":
+        return "Patient shows low risk symptoms. Rest, hydration and monitoring recommended."
+
+    elif risk == "Moderate":
+        return "Moderate risk detected. Medical consultation recommended if symptoms persist."
+
+    elif risk == "High":
+        return "High risk symptoms detected. Immediate medical consultation strongly recommended."
+
+    else:
+        return "Emergency symptoms detected. Seek immediate medical help."
 
 # -----------------------------
 # ROUTES
@@ -202,17 +217,17 @@ def generate_report():
 
         title_style = ParagraphStyle(
             name="title",
-            fontSize=24,
+            fontSize=26,
             alignment=TA_CENTER,
             textColor=colors.HexColor("#0ea5e9"),
             spaceAfter=20
         )
 
-        section_style = ParagraphStyle(
-            name="section",
+        subtitle_style = ParagraphStyle(
+            name="subtitle",
             fontSize=14,
             textColor=colors.HexColor("#38bdf8"),
-            spaceAfter=12
+            spaceAfter=10
         )
 
         normal_style = ParagraphStyle(
@@ -229,27 +244,25 @@ def generate_report():
 
         # Title
         elements.append(
-            Paragraph("🚑 CareBridge AI Medical Report", title_style)
+            Paragraph("🚑 CareBridge Legendary AI Medical Report", title_style)
         )
 
-        elements.append(Spacer(1, 20))
+        elements.append(Spacer(1, 15))
 
-        # -----------------------------
-        # Patient Table
-        # -----------------------------
+        # Health Score Card
+        summary = generate_medical_summary(result)
 
         table_data = [
-            ["Field", "Details"],
-            ["Patient Age", str(age)],
-            ["Symptoms", symptoms if symptoms else "Not Provided"],
-            ["Risk Level", result.get("risk", "Unknown")],
-            ["Confidence Score", str(result.get("confidence", 0)) + "%"]
+            ["Health Field", "Value"],
+            ["Age", str(age)],
+            ["Symptoms", symptoms],
+            ["Risk Level", result["risk"]],
+            ["Confidence Score", str(result["confidence"]) + "%"]
         ]
 
         table = Table(table_data, colWidths=[180, 320])
 
         table.setStyle(TableStyle([
-
             ("BACKGROUND", (0,0), (-1,0), colors.HexColor("#0ea5e9")),
             ("TEXTCOLOR", (0,0), (-1,0), colors.white),
 
@@ -258,63 +271,46 @@ def generate_report():
 
             ("GRID", (0,0), (-1,-1), 1, colors.HexColor("#38bdf8")),
             ("PADDING", (0,0), (-1,-1), 12),
-
         ]))
 
         elements.append(table)
 
         elements.append(Spacer(1, 25))
 
-        # -----------------------------
-        # Medical Assessment
-        # -----------------------------
-
+        # Medical AI Summary
         elements.append(
-            Paragraph("🩺 Medical Assessment", section_style)
+            Paragraph("🧠 AI Medical Insight", subtitle_style)
         )
 
         elements.append(
-            Paragraph(result.get("explanation", ""), normal_style)
+            Paragraph(summary, normal_style)
         )
 
-        # -----------------------------
-        # Emergency Warning
-        # -----------------------------
-
-        if result.get("risk") in ["High", "EMERGENCY"]:
+        # Emergency Warning Section
+        if result["risk"] in ["High", "EMERGENCY"]:
 
             elements.append(Spacer(1, 20))
 
-            emergency_text = """
-⚠ High Risk Alert
-
-Immediate medical consultation is strongly recommended.
-Visit nearest hospital if symptoms worsen.
-"""
-
-            from reportlab.lib.styles import ParagraphStyle
+            emergency_style = ParagraphStyle(
+                name="emergency",
+                fontSize=13,
+                textColor=colors.red,
+                leading=18
+            )
 
             elements.append(
                 Paragraph(
-                    emergency_text,
-                    ParagraphStyle(
-                        name="emergency",
-                        fontSize=12,
-                        textColor=colors.red,
-                        leading=18
-                    )
+                    "⚠ Emergency Risk Detected - Immediate medical attention recommended.",
+                    emergency_style
                 )
             )
 
-        # -----------------------------
         # Footer
-        # -----------------------------
-
         elements.append(Spacer(1, 40))
 
         elements.append(
             Paragraph(
-                "Powered by CareBridge AI Health Intelligence",
+                "Powered by CareBridge Legendary AI Health Intelligence",
                 ParagraphStyle(
                     name="footer",
                     alignment=TA_CENTER,
@@ -332,12 +328,12 @@ Visit nearest hospital if symptoms worsen.
             buffer,
             mimetype="application/pdf",
             as_attachment=True,
-            download_name="CareBridge_Medical_Report.pdf"
+            download_name="CareBridge_Legendary_Report.pdf"
         )
 
     except Exception as e:
 
-        print("Report Generation Error:", str(e))
+        print("Report Error:", str(e))
 
         return jsonify({
             "error": "Report generation failed"
