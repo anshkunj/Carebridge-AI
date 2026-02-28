@@ -1,3 +1,5 @@
+from reportlab.platypus import SimpleDocTemplate, Paragraph
+from reportlab.lib.styles import getSampleStyleSheet
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 
