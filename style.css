@@ -245,3 +245,27 @@ padding:22px;
 }
 
 }
+
+/* ===============================
+   TOUCH / POINTER GLOW EFFECT
+================================ */
+
+.touch-glow {
+    position: fixed;
+    width: 220px;
+    height: 220px;
+    border-radius: 50%;
+    background: radial-gradient(
+        circle,
+        rgba(56,189,248,0.35),
+        rgba(56,189,248,0.15),
+        transparent 70%
+    );
+
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+    filter: blur(40px);
+    z-index: -1;
+
+    transition: transform 0.08s linear;
+}
