@@ -188,24 +188,118 @@ def generate_report():
 
         doc = SimpleDocTemplate(buffer)
 
-        styles = getSampleStyleSheet()
+        # ===============================
+        # Premium Medical Report Styles
+        # ===============================
 
-        report_text = f"""
-CareBridge Health Report
+        from reportlab.lib import colors
+        from reportlab.platypus import Paragraph, Spacer, Table, TableStyle
+        from reportlab.lib.styles import ParagraphStyle
+        from reportlab.lib.enums import TA_CENTER, TA_LEFT
 
-Age: {age}
-Symptoms: {symptoms}
+        title_style = ParagraphStyle(
+            name="title",
+            fontSize=24,
+            alignment=TA_CENTER,
+            textColor=colors.HexColor("#0ea5e9"),
+            spaceAfter=25
+        )
 
-Risk Level: {result['risk']}
-Confidence: {result['confidence']}%
+        section_title_style = ParagraphStyle(
+            name="section_title",
+            fontSize=14,
+            textColor=colors.HexColor("#38bdf8"),
+            spaceAfter=10
+        )
 
-Advice:
-{result['explanation']}
+        normal_style = ParagraphStyle(
+            name="normal",
+            fontSize=11,
+            leading=18,
+            alignment=TA_LEFT
+        )
+
+        # ===============================
+        # Report Elements
+        # ===============================
+
+        elements = []
+
+        # Title
+        elements.append(
+            Paragraph("🚑 CareBridge AI Medical Report", title_style)
+        )
+
+        elements.append(Spacer(1, 20))
+
+        # Patient Info Table
+        patient_table = Table([
+            ["Patient Age", str(age)],
+            ["Symptoms", symptoms],
+            ["Risk Level", result["risk"]],
+            ["Confidence Score", str(result["confidence"]) + "%"]
+        ])
+
+        patient_table.setStyle(TableStyle([
+            ("BACKGROUND", (0, 0), (0, -1), colors.HexColor("#0f172a")),
+            ("TEXTCOLOR", (0, 0), (-1, -1), colors.white),
+            ("GRID", (0, 0), (-1, -1), 0.8, colors.HexColor("#38bdf8")),
+            ("PADDING", (0, 0), (-1, -1), 12),
+        ]))
+
+        elements.append(patient_table)
+
+        elements.append(Spacer(1, 25))
+
+        # Medical Assessment Section
+        elements.append(
+            Paragraph("🩺 Medical Assessment", section_title_style)
+        )
+
+        elements.append(
+            Paragraph(result["explanation"], normal_style)
+        )
+
+        # Emergency Warning
+        if result["risk"] in ["High", "EMERGENCY"]:
+
+            elements.append(Spacer(1, 20))
+
+            emergency_text = """
+⚠ High Risk Detected
+
+Please seek medical consultation immediately.
+Visit nearest hospital if symptoms worsen.
 """
 
-        story = [Paragraph(report_text, styles["Normal"])]
+            elements.append(
+                Paragraph(
+                    emergency_text,
+                    ParagraphStyle(
+                        name="emergency",
+                        fontSize=12,
+                        textColor=colors.red,
+                        leading=18
+                    )
+                )
+            )
 
-        doc.build(story)
+        # Footer
+        elements.append(Spacer(1, 30))
+
+        elements.append(
+            Paragraph(
+                "Powered by CareBridge AI Health System",
+                ParagraphStyle(
+                    name="footer",
+                    alignment=TA_CENTER,
+                    fontSize=9,
+                    textColor=colors.grey
+                )
+            )
+        )
+
+        doc.build(elements)
 
         buffer.seek(0)
 
@@ -213,13 +307,15 @@ Advice:
             buffer,
             mimetype="application/pdf",
             as_attachment=True,
-            download_name="CareBridge_Report.pdf"
+            download_name="CareBridge_Medical_Report.pdf"
         )
 
-    except Exception:
-        return jsonify({"error": "Report generation failed"}), 500
+    except Exception as e:
+        print("Report Error:", str(e))
 
-
+        return jsonify({
+            "error": "Report generation failed"
+        }), 500
 # -----------------------------
 
 if __name__ == "__main__":
