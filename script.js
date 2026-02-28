@@ -73,6 +73,10 @@ riskText.innerText =
 `Risk : ${data.risk} | Confidence : ${data.confidence}%`;
 
 resultBox.innerText = data.explanation;
+if(reportBtn){
+reportBtn.style.opacity = "1";
+reportBtn.disabled = false;
+}
 
 /* Risk Bar */
 
