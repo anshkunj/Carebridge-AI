@@ -100,6 +100,10 @@ GitHub Pages
   "explanation": "Fever detected | Cough detected. Rest, hydrate and monitor symptoms"  
 }  
 
+#### Post ```/generate-report```
+**returns:**
+Medical PDF Report Download
+
 >Try it live from the frontend: https://anshkunj.github.io/Carebridge-AI/
 
 >Try it live from the backend: https://https://carebridge-backend-ro4e.onrender.com/
