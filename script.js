@@ -144,13 +144,16 @@ method:"POST",
 headers:{
 "Content-Type":"application/json"
 },
-body:JSON.stringify({
-symptoms,
-age
-})
+body:JSON.stringify({symptoms, age})
 });
 
-const data = await res.json();
+const blob = await res.blob();
 
-window.open(data.report_url,"_blank");
+const url = window.URL.createObjectURL(blob);
+
+const a = document.createElement("a");
+a.href = url;
+a.download = "CareBridge_Report.pdf";
+a.click();
+
 }
