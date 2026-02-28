@@ -1,27 +1,34 @@
-# 🚑 CareBridge AI
+# 🚑 CareBridge AI — Accessibility First Health Risk Analyzer
 
-## 🧠 Smart Health Risk Analyzer
+![CareBridge AI](https://img.shields.io/badge/Health-AI-blue)
+![License](https://img.shields.io/badge/license-MIT-green)
 
-CareBridge AI is an accessibility-first healthcare assistant that helps users analyze health risks using AI-style triage scoring based on symptoms and age.
+## 🌟 Overview
 
-It provides:
-- 🎤 Voice symptom input
-- 🌗 Dark / Light theme support
-- ⬛ A+ Text support
-- 📊 Risk visualization dashboard
-- ♿ Accessibility friendly UI
-- 🚨 Emergency risk alerts
+**CareBridge AI** is an accessibility-focused health risk analysis system powered by AI-style symptom scoring and smart medical report generation.
+
+The platform helps users:
+- Analyze health risk from symptoms
+- Generate professional medical PDF reports
+- Receive AI-style medical insights
+- Find nearby hospitals
+
+Built using:
+- Flask (Backend API)
+- HTML + CSS + JavaScript (Frontend)
+- ReportLab (PDF Medical Report Generation)
 
 ---
 
-## ✨ Features
+## 🚀 Features
 
-✅ AI-style health risk scoring engine  
-✅ Real-time API backend using Flask  
-✅ Voice symptom recognition  
-✅ Animated risk meter visualization  
-✅ Accessibility-first design  
-✅ Sustainability health impact metric  
+✅ Health Risk Analysis Engine  
+✅ AI-style Medical Insight Summary  
+✅ Premium Medical Report PDF Generation  
+✅ Voice Symptom Input Support  
+✅ Dark / Light Theme UI  
+✅ Accessibility Text Scaling  
+✅ Hospital Location Finder  
 
 ---
 
@@ -34,7 +41,9 @@ Carebridge-AI/
 ├── app.py        
 ├── index.html        
 ├── style.css        
-├── script.js
+├── script.js  
+├── requirements.txt  
+└── render.yaml
 ```
 
 ---
