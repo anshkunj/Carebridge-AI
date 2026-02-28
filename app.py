@@ -88,6 +88,24 @@ def analyze_health(symptoms, age):
     }
 
 
+def generate_report_text(symptoms, age, result):
+
+    report_text = f"""
+    CareBridge Health Report
+
+    Age: {age}
+
+    Symptoms: {symptoms}
+
+    Risk Level: {result['risk']}
+
+    Confidence: {result['confidence']}%
+
+    Advice: {result['explanation']}
+    """
+
+    return report_text
+
 # -----------------------------
 # ROUTES
 # -----------------------------
@@ -151,6 +169,30 @@ def analyze():
             "error": str(e)
         }), 400
 
+@app.route("/generate-report", methods=["POST"])
+def generate_report():
+
+    data = request.json
+
+    symptoms = data.get("symptoms","")
+    age = int(data.get("age",0))
+
+    result = analyze_health(symptoms, age)
+
+    report_text = generate_report_text(symptoms, age, result)
+
+    doc = SimpleDocTemplate("/tmp/report.pdf")
+
+    styles = getSampleStyleSheet()
+
+    story = [Paragraph(report_text, styles["Normal"])]
+
+    doc.build(story)
+
+    return jsonify({
+        "report_url":
+        "https://carebridge-backend-ro4e.onrender.com/report.pdf"
+    })
 
 # -----------------------------
 
