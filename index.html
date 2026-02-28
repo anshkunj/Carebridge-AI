@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>CareBridge AI 🚑</title>
+
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="container">
+
+<h1 class="hero-title">🚑 CareBridge AI</h1>
+<p class="tagline">
+Accessibility First Health Risk Analyzer
+</p>
+
+<!-- Accessibility Controls -->
+<div class="accessibility-controls">
+<button onclick="toggleTheme()">🌗 Theme</button>
+<button onclick="toggleText()">A+ Text</button>
+</div>
+
+<div class="card">
+
+<form id="healthForm">
+
+<label>Describe Your Symptoms</label>
+
+<textarea
+id="symptoms"
+placeholder="Example: fever, cough, chest pain..."
+required>
+</textarea>
+
+<button type="button" onclick="startVoice()">
+🎙 Speak Symptoms
+</button>
+
+<label>Age</label>
+<input
+type="number"
+id="age"
+placeholder="Enter age"
+required
+/>
+
+<button type="submit">
+Analyze Risk
+</button>
+
+</form>
+
+<!-- RESULT SECTION -->
+<div id="result">
+
+<h3 id="riskText">Risk Result</h3>
+
+<div class="risk-bar-container">
+<div class="risk-bar" id="riskBar"></div>
+</div>
+
+<p id="report"></p>
+
+<!-- Hospital Button -->
+<a id="hospitalBtn"
+target="_blank"
+class="hospital-btn">
+🏥 Find Nearby Hospitals
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
