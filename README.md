@@ -7,6 +7,7 @@ CareBridge AI is an accessibility-first healthcare assistant that helps users an
 It provides:
 - 🎤 Voice symptom input
 - 🌗 Dark / Light theme support
+- ⬛ A+ Text support
 - 📊 Risk visualization dashboard
 - ♿ Accessibility friendly UI
 - 🚨 Emergency risk alerts
