@@ -186,18 +186,13 @@ def generate_report():
     styles = getSampleStyleSheet()
 
     report_text = f"""
-    CareBridge Health Report
-
-    Age: {age}
-
-    Symptoms: {symptoms}
-
-    Risk Level: {result['risk']}
-
-    Confidence: {result['confidence']}%
-
-    Advice: {result['explanation']}
-    """
+<b>CareBridge Health Report</b><br/><br/>
+Age: {age}<br/>
+Symptoms: {symptoms}<br/>
+Risk Level: {result['risk']}<br/>
+Confidence: {result['confidence']}%<br/><br/>
+Advice: {result['explanation']}
+"""
 
     story = [Paragraph(report_text, styles["Normal"])]
 
