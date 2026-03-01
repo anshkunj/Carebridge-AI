@@ -38,14 +38,36 @@ logging.basicConfig(level=logging.INFO)
 def home():  
     return """  
     <html>  
-    <head><title>CareBridge AI</title></head>  
-    <body style="background:#0f172a;color:white;height:100vh;  
-    display:flex;justify-content:center;align-items:center;  
+    <head>  
+    <title>CareBridge AI</title>  
+    </head>  
+  
+    <body style="  
+    background:#0f172a;  
+    color:white;  
+    height:100vh;  
+    display:flex;  
+    justify-content:center;  
+    align-items:center;  
     font-family:sans-serif">  
-        <div style="text-align:center">  
-            <h1>🚑 CareBridge AI</h1>  
-            <p>Health + Sustainability Intelligence Platform</p>  
-        </div>  
+  
+    <div style="text-align:center">  
+        <h1>🚑 CareBridge AI</h1>  
+        <p>Accessibility First Health Risk Analyzer</p>  
+  
+        <a href="https://anshkunj.github.io/Carebridge-AI"  
+        style="padding:14px 28px;  
+        background:#38bdf8;  
+        color:black;  
+        text-decoration:none;  
+        border-radius:12px;  
+        font-weight:bold;  
+        display:inline-block;  
+        margin-top:20px">  
+        Open Frontend 🌍  
+        </a>  
+    </div>  
+  
     </body>  
     </html>  
     """  
