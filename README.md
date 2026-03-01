@@ -94,9 +94,11 @@ Accessibility features include:
 ## 📂 Project Structure
 ```
 Carebridge-AI/        
-├── README.md        
+├── README.md  
+├── DETAILS.md   
 ├── .gitignore (Python)        
 ├── Licence (MIT)        
+├── assets  
 ├── app.py  
 ├── utils.py  
 ├── config.py  
