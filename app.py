@@ -72,130 +72,152 @@ def home():
     </html>  
     """  
   
-# --------------------------------  
-# ANALYSIS ENDPOINT  
-# --------------------------------  
-  
-@app.route("/analyze", methods=["POST"])  
-def analyze():  
-  
-    try:  
-        data = request.json or {}  
-  
-        symptoms = data.get("symptoms", "")  
-        age = int(data.get("age", 0))  
-  
-        # Health Analysis  
-        health_result = analyze_health(symptoms, age)  
-  
-        # Sustainability Analysis  
-        green_score = calculate_green_score(data)  
-        environmental_impact = estimate_environmental_impact(data)  
-  
-        return jsonify({  
-            "health_analysis": health_result,  
-            "green_score": green_score,  
-            "environmental_impact": environmental_impact,  
-            "disclaimer": app.config["MEDICAL_DISCLAIMER"]  
-        })  
-  
-    except Exception as e:  
-        logging.error(f"Analyze Error: {str(e)}")  
-        return jsonify({"error": "Server processing error"}), 500  
-  
-# --------------------------------  
-# REPORT GENERATION  
-# --------------------------------  
-  
-@app.route("/generate-report", methods=["POST"])  
-def generate_report():  
-  
-    try:  
-        data = request.json or {}  
-  
-        symptoms = data.get("symptoms", "")  
-        age = int(data.get("age", 0))  
-  
-        health_result = analyze_health(symptoms, age)  
-        green_score = calculate_green_score(data)  
-        environmental_impact = estimate_environmental_impact(data)  
-  
-        summary = generate_medical_summary(health_result)  
-  
-        buffer = io.BytesIO()  
-        doc = SimpleDocTemplate(buffer)  
-  
-        elements = []  
-  
-        # Title Style  
-        title_style = ParagraphStyle(  
-            name="title",  
-            fontSize=24,  
-            alignment=TA_CENTER,  
-            textColor=colors.HexColor("#0ea5e9"),  
-            spaceAfter=20  
-        )  
-  
-        normal_style = ParagraphStyle(  
-            name="normal",  
-            fontSize=11,  
-            leading=18  
-        )  
-  
-        # Title  
-        elements.append(  
-            Paragraph("🚑 CareBridge AI Integrated Report", title_style)  
-        )  
-        elements.append(Spacer(1, 20))  
-  
-        # Data Table  
-        table_data = [  
-            ["Field", "Value"],  
-            ["Age", str(age)],  
-            ["Symptoms", symptoms],  
-            ["Risk Level", health_result["risk"]],  
-            ["Confidence", str(health_result["confidence"]) + "%"],  
-            ["Green Score", str(green_score)],  
-            ["Environmental Impact", str(environmental_impact)]  
-        ]  
-  
-        table = Table(table_data, colWidths=[180, 320])  
-  
-        table.setStyle(TableStyle([  
-            ("BACKGROUND", (0,0), (-1,0), colors.HexColor("#0ea5e9")),  
-            ("TEXTCOLOR", (0,0), (-1,0), colors.white),  
-            ("GRID", (0,0), (-1,-1), 1, colors.HexColor("#38bdf8")),  
-            ("PADDING", (0,0), (-1,-1), 10),  
-        ]))  
-  
-        elements.append(table)  
-        elements.append(Spacer(1, 25))  
-  
-        # Medical Summary  
-        elements.append(Paragraph("🧠 Medical Insight", title_style))  
-        elements.append(Spacer(1, 10))  
-        elements.append(Paragraph(summary, normal_style))  
-        elements.append(Spacer(1, 20))  
-  
-        # Disclaimer  
-        elements.append(Paragraph("⚠ Disclaimer", title_style))  
-        elements.append(Spacer(1, 10))  
-        elements.append(Paragraph(app.config["MEDICAL_DISCLAIMER"], normal_style))  
-  
-        doc.build(elements)  
-  
-        buffer.seek(0)  
-  
-        return send_file(  
-            buffer,  
-            mimetype="application/pdf",  
-            as_attachment=True,  
-            download_name="CareBridge_Report.pdf"  
-        )  
-  
-    except Exception as e:  
-        logging.error(f"Report Error: {str(e)}")  
-        return jsonify({"error": "Report generation failed"}), 500  
+# --------------------------------
+# ANALYZE ENDPOINT
+# --------------------------------
+
+@app.route("/analyze", methods=["POST"])
+def analyze():
+    try:
+        data = request.json or {}
+
+        symptoms = data.get("symptoms", "")
+        age = int(data.get("age", 0))
+        location = data.get("location", "")
+
+        # -------------------------
+        # HEALTH ANALYSIS
+        # -------------------------
+        health_result = analyze_health(symptoms, age)
+
+        # Google Maps hospital search link
+        hospital_map = ""
+        if location:
+            hospital_map = f"https://www.google.com/maps/search/hospitals+near+{location.replace(' ', '+')}"
+
+        # -------------------------
+        # SUSTAINABILITY ANALYSIS
+        # -------------------------
+        green_score = calculate_green_score(data)
+        environmental_impact = estimate_environmental_impact(data)
+
+        return jsonify({
+            # Frontend compatible fields
+            "risk": health_result["risk"],
+            "confidence": health_result["confidence"],
+            "explanation": health_result["explanation"],
+            "hospital_map": hospital_map,
+
+            # Sustainability fields
+            "green_score": green_score,
+            "environmental_impact": environmental_impact,
+
+            "disclaimer": app.config["MEDICAL_DISCLAIMER"]
+        })
+
+    except Exception as e:
+        logging.error(f"Analyze Error: {str(e)}")
+        return jsonify({"error": "Server processing error"}), 500
+
+
+# --------------------------------
+# REPORT GENERATION
+# --------------------------------
+
+@app.route("/generate-report", methods=["POST"])
+def generate_report():
+    try:
+        data = request.json or {}
+
+        symptoms = data.get("symptoms", "")
+        age = int(data.get("age", 0))
+        location = data.get("location", "")
+
+        health_result = analyze_health(symptoms, age)
+        green_score = calculate_green_score(data)
+        environmental_impact = estimate_environmental_impact(data)
+
+        summary = generate_medical_summary(health_result)
+
+        hospital_map = ""
+        if location:
+            hospital_map = f"https://www.google.com/maps/search/hospitals+near+{location.replace(' ', '+')}"
+
+        buffer = io.BytesIO()
+        doc = SimpleDocTemplate(buffer)
+
+        elements = []
+
+        # Styles
+        title_style = ParagraphStyle(
+            name="title",
+            fontSize=22,
+            alignment=TA_CENTER,
+            textColor=colors.HexColor("#0ea5e9"),
+            spaceAfter=20
+        )
+
+        normal_style = ParagraphStyle(
+            name="normal",
+            fontSize=11,
+            leading=18
+        )
+
+        # Title
+        elements.append(
+            Paragraph("🚑 CareBridge AI Integrated Healthcare Report", title_style)
+        )
+        elements.append(Spacer(1, 20))
+
+        # Table Data
+        table_data = [
+            ["Field", "Value"],
+            ["Age", str(age)],
+            ["Symptoms", symptoms],
+            ["Risk Level", health_result["risk"]],
+            ["Confidence", str(health_result["confidence"]) + "%"],
+            ["Green Score", str(green_score)],
+            ["Environmental Impact", str(environmental_impact)],
+            ["Nearest Hospitals", hospital_map if hospital_map else "Not Provided"]
+        ]
+
+        table = Table(table_data, colWidths=[180, 320])
+
+        table.setStyle(TableStyle([
+            ("BACKGROUND", (0,0), (-1,0), colors.HexColor("#0ea5e9")),
+            ("TEXTCOLOR", (0,0), (-1,0), colors.white),
+            ("GRID", (0,0), (-1,-1), 1, colors.HexColor("#38bdf8")),
+            ("PADDING", (0,0), (-1,-1), 8),
+        ]))
+
+        elements.append(table)
+        elements.append(Spacer(1, 25))
+
+        # Medical Summary
+        elements.append(Paragraph("🧠 Medical Insight", title_style))
+        elements.append(Spacer(1, 10))
+        elements.append(Paragraph(summary, normal_style))
+        elements.append(Spacer(1, 20))
+
+        # Disclaimer
+        elements.append(Paragraph("⚠ Disclaimer", title_style))
+        elements.append(Spacer(1, 10))
+        elements.append(Paragraph(app.config["MEDICAL_DISCLAIMER"], normal_style))
+
+        doc.build(elements)
+
+        buffer.seek(0)
+
+        return send_file(
+            buffer,
+            mimetype="application/pdf",
+            as_attachment=True,
+            download_name="CareBridge_Report.pdf"
+        )
+
+    except Exception as e:
+        logging.error(f"Report Error: {str(e)}")
+        return jsonify({"error": "Report generation failed"}), 500 
   
 # --------------------------------  
 # Run Server  
