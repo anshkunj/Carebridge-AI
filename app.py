@@ -139,10 +139,6 @@ def generate_report():
 
         summary = generate_medical_summary(health_result)
 
-        hospital_map = ""
-        if location:
-            hospital_map = f"https://www.google.com/maps/search/hospitals+near+{location.replace(' ', '+')}"
-
         buffer = io.BytesIO()
         doc = SimpleDocTemplate(buffer)
 
@@ -177,8 +173,7 @@ def generate_report():
             ["Risk Level", health_result["risk"]],
             ["Confidence", str(health_result["confidence"]) + "%"],
             ["Green Score", str(green_score)],
-            ["Environmental Impact", str(environmental_impact)],
-            ["Nearest Hospitals", hospital_map if hospital_map else "Not Provided"]
+            ["Environmental Impact", str(environmental_impact)]
         ]
 
         table = Table(table_data, colWidths=[180, 320])
