@@ -136,6 +136,7 @@ def generate_report():
         title_style = ParagraphStyle(
             name="title",
             fontSize=22,
+            leading=28,
             alignment=TA_CENTER,
             textColor=colors.HexColor("#0ea5e9"),
             spaceAfter=20
