@@ -117,10 +117,9 @@ def generate_report():
 
         symptoms = data.get("symptoms", "")
         age = int(data.get("age", 0))
-        location = data.get("location", "")
 
         # Health Analysis
-        health_result = analyze_health(symptoms, age, location)
+        health_result = analyze_health(symptoms, age)
 
         # Sustainability Analysis (corrected)
         green_score = calculate_green_score(health_result["risk"])
