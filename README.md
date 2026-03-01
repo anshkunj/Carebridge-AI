@@ -1,32 +1,89 @@
-# 🚑 CareBridge AI — Accessibility First Health Risk Analyzer
-**CareBridge AI** is an accessibility-focused health risk analysis system powered by AI-style symptom scoring and smart medical report generation.
+# 🚑 CareBridge AI  
+## Healthcare • Accessibility • Sustainability 🌱 ♿
 
-The platform helps users:
-- Analyze health risk from symptoms
-- Generate professional medical PDF reports
-- Receive AI-style medical insights
-- Find nearby hospitals
-
-Built using:
-- Flask (Backend API)
-- HTML + CSS + JavaScript (Frontend)
-- ReportLab (PDF Medical Report Generation)
+> An AI-powered health risk analyzer designed to provide accessible healthcare guidance while promoting sustainable medical practices.
 
 ---
 
-## 🚀 Features
+## 🌟 Problem Statement
 
-✅ Health Risk Analysis Engine  
-✅ AI-style Medical Insight Summary  
-✅ Premium Medical Report PDF Generation  
-✅ Voice Symptom Input Support  
-✅ Dark / Light Theme UI  
-✅ Accessibility Text Scaling  
-✅ Hospital Location Finder  
+Many people face challenges in:
+
+- Accessing quick medical guidance
+- Understanding symptom severity
+- Finding nearby medical help during emergencies
+- Reducing unnecessary hospital visits and paper-based reports
+
+This also contributes to:
+
+- Increased environmental impact from unnecessary travel
+- Paper waste from traditional medical reporting
 
 ---
 
-## 🏗 Project Structure
+## 💡 Solution
+
+CareBridge AI solves these problems by providing:
+
+✅ AI-based health risk detection  
+✅ Emergency medical guidance detection  
+✅ Nearby hospital navigation  
+✅ Sustainability impact tracking  
+✅ Accessible UI features  
+
+Accessibility features include:
+- Voice symptom input 🎙  
+- Large text mode  
+- Dark / Light theme toggle  
+
+---
+
+## 🏥 Features
+
+### Health Intelligence
+- Symptom-based risk prediction
+- Age-based risk adjustments
+- Emergency symptom override detection
+
+### Accessibility Features
+- Voice input support
+- High contrast UI themes
+- Text size accessibility toggle
+
+### Sustainability Tracking 🌱
+- CO₂ savings estimation
+- Paper usage reduction tracking
+- Digital report generation
+
+### Smart Medical Assistance
+- Nearby hospital search
+- Instant triage guidance
+- AI medical summary reports
+
+---
+
+## 🧠 Tech Stack
+
+### Frontend
+- HTML5
+- CSS3
+- JavaScript
+
+### Backend
+- Python
+- Flask
+- Flask-CORS
+
+### AI & Reporting
+- ReportLab PDF Engine
+
+### Deployment
+- Render (Backend)
+- GitHub Pages (Frontend)
+
+---
+
+## 📂 Project Structure
 ```
 Carebridge-AI/        
 ├── README.md        
