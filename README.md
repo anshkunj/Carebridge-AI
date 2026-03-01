@@ -167,6 +167,23 @@ Medical PDF Report Download
 
 >Try it live from the backend: https://https://carebridge-backend-ro4e.onrender.com/
 
+## 🌍 Sustainability Impact
+**CareBridge AI** promotes sustainability by:
+- Reducing unnecessary hospital visits
+- Encouraging early digital diagnosis
+- Reducing paper-based medical reporting
+
+## ♿ Accessibility Impact
+Voice-based input support  
+Readable UI design  
+Theme customization  
+
+## 🔥 Why This Project Matters
+**CareBridge AI** bridges the gap between:
+- Healthcare accessibility
+- Environmental sustainability
+- AI-powered medical guidance
+
 <p align="left">
   <a href="https://anshkunj.github.io/Portfolio" style="text-decoration: none;">
     <img 
