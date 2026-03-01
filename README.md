@@ -1,3 +1,11 @@
+<p align="center">
+  <img src="https://github.com/anshkunj/Carebridge-AI/blob/a0541303b239cbedaf67a67a74a5b28e700b2c26/assets/file_0000000027e871faae13d1289f22b20a.png" alt="Carebridge-AI 🚑" width="1200">
+</p>
+
+<h1 align="center">CareBridge AI</h1>
+<p align="center">Bridging Healthcare, Accessibility & Sustainability with AI”</p>
+
+
 # 🚑 CareBridge AI  
 ## Healthcare • Accessibility • Sustainability 🌱 ♿
 
