@@ -89,7 +89,9 @@ Carebridge-AI/
 ├── README.md        
 ├── .gitignore (Python)        
 ├── Licence (MIT)        
-├── app.py        
+├── app.py  
+├── utils.py  
+├── config.py  
 ├── index.html        
 ├── style.css        
 ├── script.js  
