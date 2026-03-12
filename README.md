@@ -173,7 +173,7 @@ GitHub Pages
 **returns:**
 Medical PDF Report Download
 
->Try it live from the frontend: https://anshkunj.github.io/Carebridge-AI/
+>Try it live from the [![AtCoder](https://img.shields.io/badge/Carebridge-AI-Frontend-lightgrey?style=flat)](https://anshkunj.github.io/Carebridge-AI)
 
 >Try it live from the backend: https://https://carebridge-backend-ro4e.onrender.com/
 
